@@ -5,6 +5,10 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/iwamad-practice/',
+  build: {
+    outDir: 'docs',
+  },
   test: {
     environment: 'jsdom',
     globals: true,
