@@ -28,3 +28,18 @@ main {
     background: #fff0f0;
 }
 
+nav {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+nav a.active {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #d23f3f;
+}
+
+.page {
+    padding: 20px;
+}
