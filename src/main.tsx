@@ -1,13 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router'
 import './style.css'
-import App from './App.tsx'
-import { BrowserRouter } from 'react-router/internal/react-server-client'
+import App from './App'
+import { LikesProvider } from './context/LikesContext'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter basename={import.meta.env.BASE_URL}>
-    <App />
+      <LikesProvider>
+        <App />
+      </LikesProvider>
     </BrowserRouter>
   </StrictMode>,
 )

@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import LikeButton from './LikeButton'
+import { useLikes } from '../context/LikesContext'
 
 type ProfileCardProps = {
     name: string;
@@ -8,19 +9,17 @@ type ProfileCardProps = {
 };
 
 function ProfileCard({ name, bio, email, github }: ProfileCardProps){
-    const [liked, setLiked] = useState(false);
+    const { likes } = useLikes()
 
     return (
-        <section className={liked ? 'card is-liked' : 'card'}>
+        <section className={likes > 0 ? 'card is-liked' : 'card'}>
             <h2>{name}</h2>
             <p>{bio}</p>
             <div className="links">
                 <a href={`mailto:${email}`}>Email</a>
                 <a href={github}>GitHub</a>
             </div>
-            <button onClick={() => setLiked(!liked)}>
-                {liked ? '♥ Liked' : '♡ Like'}
-            </button>    
+            <LikeButton />
         </section>
     );
 }
