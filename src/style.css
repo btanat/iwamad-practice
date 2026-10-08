@@ -23,3 +23,8 @@ main {
     gap: 10px;
 }
 
+.card.is-liked {
+    border-color: #da2d2d;
+    background: #fff0f0;
+}
+
