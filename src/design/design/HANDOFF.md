@@ -30,3 +30,8 @@ space/2 = 8
 space/4 = 16
 space/6 = 24
 radius/md = 8
+
+Component details:
+Button: height 44, padding-x 8, gap 10, radius 8, text 14; primary fill color/primary; secondary fill color/surface + 1px stroke color/primary
+Tag: text 14, padding-x 8, padding-y 2, radius 999, 1px stroke color/border
+PostCard text: title 20 regular color/text; date 14 regular color/text-muted; text centered
