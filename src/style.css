@@ -19,7 +19,7 @@ main {
 }
 
 .links {
-    display: flex;
+    display: flex; /* используем flexbox для расположения ссылок */
     gap: 10px;
 }
 
