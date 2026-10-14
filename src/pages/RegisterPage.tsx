@@ -1,8 +1,11 @@
 import { useState } from 'react'
-import type { ChangeEvent, SubmitEvent } from 'react'
+import type { ChangeEvent, FocusEvent, SubmitEvent } from 'react'
 import Button from '../components/ui/Button'
+import TextField from '../components/ui/TextField'
 import { validateRegistration } from '../lib/validateRegistration'
 import type { RegistrationValues } from '../lib/validateRegistration'
+
+type Touched = Partial<Record<keyof RegistrationValues, boolean>>
 
 const initialValues: RegistrationValues = {
   fullName: '',
@@ -14,16 +17,24 @@ const initialValues: RegistrationValues = {
 
 function RegisterPage() {
   const [values, setValues] = useState<RegistrationValues>(initialValues)
+  const [touched, setTouched] = useState<Touched>({})
   const [submitAttempted, setSubmitAttempted] = useState(false)
   const [registered, setRegistered] = useState(false)
 
-  // errors are computed on every render, not stored in state
   const errors = validateRegistration(values)
-  const shown = submitAttempted ? errors : {}
+
+  function errorFor(field: keyof RegistrationValues) {
+    return touched[field] || submitAttempted ? errors[field] : undefined
+  }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, type, value, checked } = event.target
     setValues((current) => ({ ...current, [name]: type === 'checkbox' ? checked : value }))
+  }
+
+  function handleBlur(event: FocusEvent<HTMLInputElement>) {
+    const { name } = event.target
+    setTouched((current) => ({ ...current, [name]: true }))
   }
 
   function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
@@ -46,57 +57,42 @@ function RegisterPage() {
     <section className="page">
       <h2>Register</h2>
       <form className="form" onSubmit={handleSubmit} noValidate>
-        <div className="field">
-          <label htmlFor="fullName">Full name</label>
-          <input
-            id="fullName"
-            name="fullName"
-            type="text"
-            value={values.fullName}
-            onChange={handleChange}
-            aria-invalid={shown.fullName ? true : undefined}
-          />
-          {shown.fullName && <p className="field-error">{shown.fullName}</p>}
-        </div>
-
-        <div className="field">
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            value={values.email}
-            onChange={handleChange}
-            aria-invalid={shown.email ? true : undefined}
-          />
-          {shown.email && <p className="field-error">{shown.email}</p>}
-        </div>
-
-        <div className="field">
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            value={values.password}
-            onChange={handleChange}
-            aria-invalid={shown.password ? true : undefined}
-          />
-          {shown.password && <p className="field-error">{shown.password}</p>}
-        </div>
-
-        <div className="field">
-          <label htmlFor="confirmPassword">Confirm password</label>
-          <input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            value={values.confirmPassword}
-            onChange={handleChange}
-            aria-invalid={shown.confirmPassword ? true : undefined}
-          />
-          {shown.confirmPassword && <p className="field-error">{shown.confirmPassword}</p>}
-        </div>
+        <TextField
+          label="Full name"
+          name="fullName"
+          type="text"
+          value={values.fullName}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={errorFor('fullName')}
+        />
+        <TextField
+          label="Email"
+          name="email"
+          type="email"
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={errorFor('email')}
+        />
+        <TextField
+          label="Password"
+          name="password"
+          type="password"
+          value={values.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={errorFor('password')}
+        />
+        <TextField
+          label="Confirm password"
+          name="confirmPassword"
+          type="password"
+          value={values.confirmPassword}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={errorFor('confirmPassword')}
+        />
 
         <div className="field">
           <label className="check" htmlFor="acceptTerms">
@@ -106,10 +102,17 @@ function RegisterPage() {
               type="checkbox"
               checked={values.acceptTerms}
               onChange={handleChange}
+              onBlur={handleBlur}
+              aria-invalid={errorFor('acceptTerms') ? true : undefined}
+              aria-describedby={errorFor('acceptTerms') ? 'acceptTerms-error' : undefined}
             />
             I accept the terms
           </label>
-          {shown.acceptTerms && <p className="field-error">{shown.acceptTerms}</p>}
+          {errorFor('acceptTerms') && (
+            <p id="acceptTerms-error" className="field-error">
+              {errorFor('acceptTerms')}
+            </p>
+          )}
         </div>
 
         <Button type="submit">Create account</Button>
