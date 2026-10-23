@@ -1,3 +1,4 @@
+import Card from './ui/Card'
 import LikeButton from './LikeButton'
 import { useLikes } from '../context/LikesContext'
 
@@ -12,7 +13,7 @@ function ProfileCard({ name, bio, email, github }: ProfileCardProps){
     const { likes } = useLikes()
 
     return (
-        <section className={likes > 0 ? 'card is-liked' : 'card'}>
+        <Card className={likes > 0 ? 'card is-liked' : 'card'}>
             <h2>{name}</h2>
             <p>{bio}</p>
             <div className="links">
@@ -20,7 +21,7 @@ function ProfileCard({ name, bio, email, github }: ProfileCardProps){
                 <a href={github}>GitHub</a>
             </div>
             <LikeButton />
-        </section>
+        </Card>
     );
 }
 
