@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    padding: 20px; /* внутренние отступы карточки */
+    width: 100%;
+    
+    border: 1px solid #d23f3f; /* рамка вокруг карточки */
+    margin: 20px; /* расстояние карточки от других элементов */
+    max-width: 400px;
+}
+
+.links {
+    display: flex;
+    gap: 10px;
+}
+
+.card.is-liked {
+    border-color: #da2d2d;
+    background: #fff0f0;
+}
+
