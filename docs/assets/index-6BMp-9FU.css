@@ -1,0 +1,1 @@
+*{box-sizing:border-box;margin:0;padding:0}main{justify-content:center;display:flex}.card{border:1px solid #d23f3f;width:100%;max-width:400px;margin:20px;padding:20px}.links{gap:10px;display:flex}.card.is-liked{background:#fff0f0;border-color:#da2d2d}nav{gap:12px;margin-top:8px;display:flex}nav a.active{color:#d23f3f;font-weight:700;text-decoration:underline}.page{padding:20px}

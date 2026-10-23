@@ -1,38 +1,25 @@
-import { useState } from 'react';
-import SkillBadge from './SkillBadge';
-import type { Skill } from '../types';
+import LikeButton from './LikeButton'
+import { useLikes } from '../context/LikesContext'
 
 type ProfileCardProps = {
     name: string;
     bio: string;
     email: string;
     github: string;
-    skills: Skill[];
 };
 
-function ProfileCard({ name, bio, email, github, skills  }: ProfileCardProps){
-    const [liked, setLiked] = useState(false);
+function ProfileCard({ name, bio, email, github }: ProfileCardProps){
+    const { likes } = useLikes()
 
     return (
-        <section className={liked ? 'card is-liked' : 'card'}>
+        <section className={likes > 0 ? 'card is-liked' : 'card'}>
             <h2>{name}</h2>
             <p>{bio}</p>
-            {skills.length > 0 ? (
-                <ul className="skills">
-                    {skills.map((skill) => (
-                        <SkillBadge key={skill.id} skill={skill} />
-                    ))}
-                </ul>
-            ) : (
-                <p>No skills added yet.</p>
-            )}
             <div className="links">
                 <a href={`mailto:${email}`}>Email</a>
                 <a href={github}>GitHub</a>
             </div>
-            <button onClick={() => setLiked(!liked)}>
-                {liked ? '♥ Liked' : '♡ Like'}
-            </button>    
+            <LikeButton />
         </section>
     );
 }

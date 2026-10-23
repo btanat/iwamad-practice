@@ -1,31 +1,21 @@
-import Header from './components/Header';
-import ProfileCard from './components/ProfileCard';
-import Footer from './components/Footer';
-import './style.css';
-import type { Skill } from './types';
-
-const skills: Skill[] = [
-    { id: 1, label: 'Python' },
-    { id: 2, label: 'C++' },
-    { id: 3, label: 'AWS' },
-];
+import { Routes, Route } from 'react-router'
+import Layout from './components/Layout'
+import HomePage from './pages/HomePage'
+import SkillsPage from './pages/SkillsPage'
+import ContactPage from './pages/ContactPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   return (
-    <>
-      <Header name="Batyr" role="Web Developer" />
-      <main>
-        <ProfileCard
-          name="Batyr"
-          bio="Hello! I'm Batyr, I want to create amazing web experiences. I already have experience in Python, C++, AWS. Now I'm learning Golang, Web Development and Ethical Hacking."
-          email="batyrtangat@gmail.com"
-          github="https://github.com/btanat"
-          skills={skills}
-        />
-      </main>
-      <Footer text="Batyr. All rights reserved." />
-    </>
-  );
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="skills" element={<SkillsPage />} />
+        <Route path="contact" element={<ContactPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
+  )
 }
 
-export default App;
+export default App
