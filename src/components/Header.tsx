@@ -24,6 +24,7 @@ function Header({ name, role }: HeaderProps) {
         <NavLink to="/skills">Skills</NavLink>
         <NavLink to="/contact">Contact</NavLink>
         <NavLink to="/register">Register</NavLink>
+        <NavLink to="/events">Events</NavLink>
         <span>♥ {likes}</span>
       </nav>
     </header>
