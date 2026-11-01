@@ -1,45 +1,92 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-main {
-    display: flex;
-    justify-content: center;
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--color-text);
+  background: var(--color-surface);
 }
 
-.card {
-    padding: 20px; /* внутренние отступы карточки */
-    width: 100%;
-    
-    border: 1px solid #d23f3f; /* рамка вокруг карточки */
-    margin: 20px; /* расстояние карточки от других элементов */
-    max-width: 400px;
+/* header: stacked on phones, one row from 640px */
+.site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
 }
 
-.links {
-    display: flex; /* используем flexbox для расположения ссылок */
-    gap: 10px;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
-.card.is-liked {
-    border-color: #da2d2d;
-    background: #fff0f0;
+.brand p {
+  font-size: 14px;
+  color: var(--color-text-muted);
 }
 
 nav {
-    display: flex;
-    gap: 12px;
-    margin-top: 8px;
+  display: flex;
+  gap: var(--space-4);
+}
+
+nav a {
+  color: var(--color-primary);
 }
 
 nav a.active {
-    font-weight: bold;
-    text-decoration: underline;
-    color: #d23f3f;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-6) var(--space-4);
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.links a {
+  color: var(--color-primary);
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
 }
 
 .page {
-    padding: 20px;
+  padding: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .site-header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.page a {
+  color: var(--color-primary);
+}
+
+footer {
+  padding: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-text-muted);
 }
